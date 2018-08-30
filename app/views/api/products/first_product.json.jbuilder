@@ -1,1 +1,1 @@
-first_product.json.jbuilder
+json.first_product @product

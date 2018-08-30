@@ -1,0 +1,1 @@
+json.last_product @product

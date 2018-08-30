@@ -9,4 +9,14 @@ class Api::ProductsController < ApplicationController
     @product = Product.find_by(id: 1)
     render "first_product.json.jbuilder"
   end
+
+  def second_product_method 
+    @product = Product.find_by(id: 2)
+    render "second_product.json.jbuilder"
+  end
+
+  def last_product_method 
+    @product = Product.find_by(id: 4)
+    render "last_product.json.jbuilder"
+  end
 end
