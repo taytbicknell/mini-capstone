@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  # STEP 1: A ROUTE triggers a controller action
-  # verb "/urls" => "namespace/controllers#action"
+  
   namespace :api do
     get "/all_products_url" => "products#all_products_method"
     
@@ -9,7 +8,13 @@ Rails.application.routes.draw do
     get "/second_product_url" => "products#second_product_method"
      
     get "/last_product_url" => "products#last_product_method"
-  end
+    get "/query_params_url" => "query_products#query_params_method"
 
+    get "/products" => "products#index"
+    get "/products/:id" => "products#show"
+    post "/products" => "products#create"
+    patch "/products/:id" => "products#update"
+    delete "/products/:id" => "products#destroy"
+  end
 end
 
