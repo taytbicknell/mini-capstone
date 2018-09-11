@@ -1,36 +1,9 @@
 class Api::ProductsController < ApplicationController
-  
-  def all_products_method 
-    @products = Product.all
-    render "all_products.json.jbuilder"
-  end
-
-  def first_product_method 
-    @product = Product.find_by(id: 1)
-    render "first_product.json.jbuilder"
-  end
-
-  def second_product_method 
-    @product = Product.find_by(id: 2)
-    render "second_product.json.jbuilder"
-  end
-
-  def last_product_method 
-    @product = Product.find_by(id: 4)
-    render "last_product.json.jbuilder"
-  end
-
-  def query_params_method
-    input_value = params["message"]
-    @message = "Message says #{input_value}"
-    render "query_params.json.jbuilder"
-  end
-
   def index
+    @products = Product.order(id: :asc)
     if params[:search]
-      @products = Product.where("name LIKE ?", "%#{params[:search]}%")
+      @products = Product.where("id LIKE ? OR name LIKE ? OR price LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%",)
     end
-    @products = @products.order(id: :asc)
     render "index.json.jbuilder"
   end
 
