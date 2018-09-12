@@ -1,19 +1,13 @@
 class Product < ApplicationRecord
   
-# Name: 
-# length maximum 40
-# Uniqueness true
+#   1. In the Product model, make a `supplier` method to get the associated supplier. Test the code in the rails console with something like:
+# ```product = Product.first
+# product.supplier```
+# 2. Change your app to show the supplier’s info with each product.
 
-# Price:
-# Presence true
-# Numericality true
-# Not a negative number or 0
-
-# Image_url:
-# Presence true
-
-# Description: 
-# Length between 6 - 500 characters
+  def supplier
+    Supplier.find_by(id: supplier_id) #find_by returns hash
+  end
 
   validates :name, length: {maximum: 40}
   validates :name, presence: true
