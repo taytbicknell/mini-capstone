@@ -8,8 +8,15 @@ Supplier.create!([
 ])
 
 Product.create!([
-  {name: "widget", price: 6, image_url: "placeholder.jpg", description: "blue, small, heavy"},
-  {name: "doorstop", price: 8, image_url: "placeholder.jpg", description: "gray, rubber, universal"},
-  {name: "lamp", price: 42, image_url: "placeholder.jpg", description: "nice, bright, pretty"},
-  {name: "toaster", price: 38, image_url: "placeholder.jpg", description: "efficient, compact, warranty"}
+  {name: "widget", price: 6,  description: "blue, small, heavy"},
+  {name: "doorstop", price: 8, description: "gray, rubber, universal"},
+  {name: "lamp", price: 42, description: "nice, bright, pretty"},
+  {name: "toaster", price: 38, description: "efficient, compact, warranty"}
+])
+
+Image.create!([
+  {name: "widget", url: "placeholder.jpg", description: "blue, small, heavy"},
+  {name: "doorstop", url: "placeholder.jpg", description: "gray, rubber, universal"},
+  {name: "lamp", url: "placeholder.jpg", description: "nice, bright, pretty"},
+  {name: "toaster", url: "placeholder.jpg", description: "efficient, compact, warranty"}
 ])

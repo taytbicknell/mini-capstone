@@ -1,21 +1,34 @@
 class Api::ProductsController < ApplicationController
+  
+  before_action :authenticate_admin, except: [:index, :show]
+
   def index
-    @products = Product.order(id: :asc)
+    @products = Product.all
+    
     if params[:search]
       @products = Product.where("id LIKE ? OR name LIKE ? OR price LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%",)
     end
+    
+    if params[:price_sort]
+      @products = @products.order(price: :asc)
+    else 
+      @products = @products.order(id: :asc)
+    end
+    
     render "index.json.jbuilder"
   end
 
   def create
-    @products = Product.create(
+    @product = Product.new(
     name: params[:name],
     price: params[:price],
-    image_url: params[:image_url],
-    description: params[:description],
-    supplier_id: params[:supplier_id]
+    description: params[:description]
     )
-    render "show.json.jbuilder"
+    if @product.save
+      render "show.json.jbuilder"
+    else
+      render json: {errors: @product.errors.full_message}, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -25,12 +38,9 @@ class Api::ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-
     @product.name = params[:name] || @product.name
     @product.price = params[:price] || @product.price
-    @product.image_url = params[:image_url] || @product.image_url
     @product.description = params[:description] || @product.description
-    @prodcuct.supplier_id = params[:supplier_id]
 
     if @product.save
       render "show.json.jbuilder"
